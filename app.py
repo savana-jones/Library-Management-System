@@ -1,11 +1,14 @@
 import sqlite3
 from flask import Flask, render_template, request, redirect, url_for
+from models.database import Database
+from models.observer import Observer
 
 app = Flask(__name__)
 
+observer = Observer()
 # Initialize the database with rental status and queue information
 def init_db():
-    with sqlite3.connect("library.db") as conn:
+    with Database().get_connection() as conn:
         cursor = conn.cursor()
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS books (
@@ -105,7 +108,7 @@ def wait_in_new(book_id):
             cursor = conn.cursor()
             cursor.execute("INSERT OR IGNORE INTO waiting_queue (book_id, user_email) VALUES (?, ?)", (book_id, user_email))
             conn.commit()
-
+        observer.add_to_waitlist(book_id, user_email)
         # Redirect to the homepage with a different message key
         return redirect(url_for('index', added_to_waitlist="true"))
     
@@ -121,6 +124,8 @@ def return_book(book_id):
     # Increase the quantity if it's less than 5
     cursor.execute("UPDATE books SET quantity = MIN(quantity + 1, 5) WHERE id = ?", (book_id,))
     conn.commit()
+
+    observer.notify(book_id)
     
     conn.close()
     return redirect(url_for('index'))
