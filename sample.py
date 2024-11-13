@@ -10,7 +10,7 @@ books = cursor.fetchall()
 
 # Print the data
 for book in books:
-    print(f"ID: {book[0]}, Title: {book[1]}, Author: {book[2]}, Rented: {'Yes' if book[3] else 'No'}")
+    print(f"ID: {book[0]}, Title: {book[1]}, Author: {book[2]}, Rented: {'Yes' if book[3] else 'No'},Quantity:{book[4]}")
 
 # Close the connection
 conn.close()

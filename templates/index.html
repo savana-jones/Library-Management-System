@@ -11,15 +11,37 @@
         <input type="text" name="keyword" placeholder="Search for books...">
         <button type="submit">Search</button>
     </form>
-    <a href="{{ url_for('add_book') }}">Add a New Book</a>
+    <form action="{{ url_for('add_book') }}" method="get" style="display: inline;">
+        <button type="submit" style="min-width: 200px;">Add Book a New Book</button>
+        </button>
+    </form>
+    
 
     <div class="book-container">
         {% for book in books %}
         <div class="book-card">
             <h3>{{ book[1] }}</h3>
             <p>by {{ book[2] }}</p>
+            
+            {% if book[4] > 0 %}
+            <form action="{{ url_for('rent', book_id=book[0]) }}" method="get" style="display: inline;">
+                <button type="submit" class="rent-button">Rent this Book</button>
+            </form>
+            {% else %}
+            <form action="{{ url_for('wait_in_line', book_id=book[0]) }}" method="get" style="display: inline;">
+                
+                <button type="submit" class="wait-button">Wait in Line</button>
+            </form>
+            {% endif %}
+            
+            {% if book[4] < 5 %}
+                <form action="{{ url_for('return_book', book_id=book[0]) }}" method="post" style="display: inline;">
+                    <button type="submit" class="return-button">Return this Book</button>
+                </form>
+            {% endif %}
         </div>
         {% endfor %}
     </div>
+    
 </body>
 </html>

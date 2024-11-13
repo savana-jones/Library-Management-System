@@ -90,3 +90,17 @@ button, input[type="text"] {
         grid-template-columns: repeat(2, 1fr); /* 2 books per row on phones */
     }
 }
+.rent-button {
+    background-color: green;
+    color: white;
+}
+
+.wait-button {
+    background-color: orange;
+    color: white;
+}
+
+.return-button {
+    background-color: red;
+    color: white;
+}

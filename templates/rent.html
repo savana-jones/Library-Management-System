@@ -4,16 +4,29 @@
     <meta charset="UTF-8">
     <title>Rent the Book</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+          display: flex;
+          justify-content: center; /* Centers content horizontally */
+          align-items: center; /* Centers content vertically */
+          height: 80vh; /* Full viewport height */
+          margin: 0; /* Remove any default margin */
+          flex-direction: column; /* Stack elements vertically */
+        }
+      </style>
 </head>
 <body>
     <h2>Rent "{{ book[1] }}"</h2>
     <p>Author: {{ book[2] }}</p>
     <p>Are you sure you want to rent this book?</p>
     
-    <form action="{{ url_for('confirm_rent', book_id=book[0]) }}" method="post">
+    <form action="{{ url_for('confirm_rent', book_id=book[0]) }}" method="post" style="display: inline;">
         <button type="submit" class="confirm-button">Confirm Rental</button>
     </form>
     
-    <a href="{{ url_for('index') }}" class="cancel-button">Cancel</a>
+    <form action="{{ url_for('index') }}" method="get" style="display: inline;">
+        <button type="submit" class="cancel-button">Cancel</button>
+    </form>
+    
 </body>
 </html>
