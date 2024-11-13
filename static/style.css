@@ -1,0 +1,92 @@
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    color: #333;
+}
+
+.search-form {
+    margin: 20px 0;
+}
+
+button, input[type="text"] {
+    padding: 10px;
+    margin: 5px;
+}
+
+.add-button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+.add-button:hover {
+    background-color: #0056b3;
+}
+
+/* Book container and card styles */
+.book-container {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    margin-top: 20px;
+}
+
+/* Book card styling with longer length */
+.book-card {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.2s;
+    min-height: 200px; /* Increased minimum height for button space */
+}
+
+.book-card h3 {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+.book-card p {
+    margin: 0.5em 0 1em;
+    color: #555;
+}
+
+/* Hover effect */
+.book-card:hover {
+    transform: scale(1.05);
+}
+
+
+/* Responsive layout adjustments */
+@media (min-width: 992px) {
+    .book-container {
+        grid-template-columns: repeat(4, 1fr); /* 4 books per row on large screens */
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .book-container {
+        grid-template-columns: repeat(3, 1fr); /* 3 books per row on tablets */
+    }
+}
+
+@media (max-width: 767px) {
+    .book-container {
+        grid-template-columns: repeat(2, 1fr); /* 2 books per row on phones */
+    }
+}

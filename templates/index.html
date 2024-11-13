@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Library Management</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Library Management System</h1>
+    <form action="{{ url_for('search') }}" method="post">
+        <input type="text" name="keyword" placeholder="Search for books...">
+        <button type="submit">Search</button>
+    </form>
+    <a href="{{ url_for('add_book') }}">Add a New Book</a>
+
+    <div class="book-container">
+        {% for book in books %}
+        <div class="book-card">
+            <h3>{{ book[1] }}</h3>
+            <p>by {{ book[2] }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
